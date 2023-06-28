@@ -1,10 +1,9 @@
 # useReducer
-> 상태 관리를 위해 사용되는 훅
-> 데이터 구조가 복잡한 경우 useState 보다 사용하면 좋음!
-
+- 상태 관리를 위해 사용되는 훅
+- 데이터 구조가 복잡한 경우 useState 보다 사용하면 좋음!
 
 ## 구조
-> 순서 존재
+- 순서 존재
 1. useReducer 가져오기
 > import React, { useReducer } from 'react';
 
@@ -16,7 +15,6 @@
 
 4. 디스패치 함수 사용하여 상태 업데이트 (액션을 발생시켜 상태 업데이트)
 > const handleIncrement = () => { dispatch({ type: 'INCREMENT' }); };
-
 
 ### 코드 예시
 <pre>

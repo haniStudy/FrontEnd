@@ -1,14 +1,12 @@
 # useState
-> 가장 기본적인 hook
-> 함수형 컴포넌트에서 상태(state)를 관리할 수 있게 해주는 기능
-> > 컴포넌트: UI요소를 구분하는 단위 (가장 작은 조각)
-
+- 가장 기본적인 hook
+- 함수형 컴포넌트에서 상태(state)를 관리할 수 있게 해주는 기능
+> 컴포넌트: UI요소를 구분하는 단위 (가장 작은 조각)
 
 ## 구조
-> const [state, setState] = useState(초기값);
-> 매개변수: 초기 값
-> 리턴 값: 배열 (0: value, 1: value를 set할 수 있는 fun)
-
+- const [state, setState] = useState(초기값);
+- 매개변수: 초기 값
+- 리턴 값: 배열 (0: value, 1: value를 set할 수 있는 fun)
 
 ### 코드 예시
 <pre>
