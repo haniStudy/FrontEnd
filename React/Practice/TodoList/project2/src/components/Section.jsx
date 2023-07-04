@@ -1,5 +1,4 @@
-import { deleteTodo } from "../redux/modules/todoList";
-import { modifyTodo } from "../redux/modules/todoList";
+import { deleteTodo, modifyTodo } from "../redux/modules/todoList";
 import { Link } from "react-router-dom";
 
 const Section = ({todoList, condition, dispatch}) => {
@@ -15,8 +14,8 @@ const Section = ({todoList, condition, dispatch}) => {
                         <li className='main-article-section-li' key={todo.id}>
                             <Link to={`/detail/${todo.id}`}>상세 보기</Link>
                             <div className='li-top'>
-                                <span className='li-title'>{todo.title}</span>
-                                <span className='li-content'>{todo.content}</span>
+                                <span className='li-title'>{todo.title}</span>      {/* 제목 */}
+                                <span className='li-content'>{todo.content}</span>  {/* 내용 */}
                             </div>
                             <div className='li-bottom'>
                                 <button className='li-delete-btn' onClick={()=> dispatch(deleteTodo(todo))}>삭제하기</button>
