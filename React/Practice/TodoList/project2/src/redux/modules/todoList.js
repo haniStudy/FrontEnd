@@ -19,7 +19,6 @@ export const modifyTodo = (payload) => ( {type: modify_Todo, payload:payload} );
 
 // 리듀서
 const todoList = (state=[], action) => {
-    console.log()
     switch (action.type) {
         case add_Todo:
             return addAction(state, action.payload);
@@ -32,7 +31,6 @@ const todoList = (state=[], action) => {
     }
 };
 export default todoList;
-
 
 // 함수
 const addAction = (state, todo) => {
