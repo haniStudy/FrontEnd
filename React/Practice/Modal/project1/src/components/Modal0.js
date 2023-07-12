@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-export const Modal0 = ({state,setModal0}) => {
+export const Modal0 = ({modalState, setModalState}) => {
     return (
         <div>
-            <Modal state={state}>
+            <Modal state={modalState}>
                 <Contents>
                     <span>
                         닫기와 확인 버튼 2개가 있고, 닫기버튼을 누르면 닫힙니다
                     </span>
                     <BtnContainer>
-                        <button onClick={() => setModal0(!state)}>닫기</button>
+                        <button onClick={() => setModalState(!modalState)}>닫기</button>
                         <button size={'Small'} color={"mint"}>확인</button>
                     </BtnContainer>
                 </Contents>
@@ -17,8 +17,6 @@ export const Modal0 = ({state,setModal0}) => {
         </div>
     )
 }
-
-export default Modal0;
 
 const Modal = styled.div`
     display:${props => props.state ? 'block' : 'none'};

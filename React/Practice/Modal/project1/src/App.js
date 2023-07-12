@@ -1,9 +1,11 @@
 import { useState } from "react";
-import Modal0 from "./components/Modal0";
+import { Modal0 } from "./components/Modal0";
+import { Modal1 } from "./components/Modal1";
 
 function App() {
   // modal
-  const [modalState, setModal0] = useState(false);
+  const [modalState, setModalState] = useState(false);
+  const [modalState1, setModalState1] = useState(false);
 
   return (
     <div>
@@ -11,11 +13,13 @@ function App() {
         <ul>
           <li>
             <h1>Modal</h1>
-            <button onClick={() => setModal0(true)}>opne modal</button>
+            <button onClick={() => setModalState(true)}>opne modal</button>
+            <button onClick={() => setModalState1(true)}>opne modal</button>
           </li>
         </ul>
       </div>
-      <Modal0 state={modalState} setModal0={setModal0}/>
+      <Modal0 modalState={modalState} setModalState={setModalState}/>
+      <Modal1 modalState={modalState1} setModalState={setModalState1}/>
     </div>
   )
 }
