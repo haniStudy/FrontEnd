@@ -1,5 +1,6 @@
 # Thunk
-- 비동기 작업을 처리하기 위한 함수
+- 비동기 작업을 처리하기 위한 함수 (미들웨어)
+> 미들웨어: 리듀서가 액션을 처리하기 전에 실행되는 함수로 액션과 리듀서 사이의 중간자
 - 특정 작업을 나중에 할 수 있도록 미루기 위해 함수 형태로 감싼 것
 - thunk를 사용하면 우리가 dispatch를 할때 객체가 아닌 함수를 dispatch 할 수 있게 해줌 
 > dispatch(객체) 가 아니라 dispatch(함수)를 할 수 있게 되는 것
@@ -10,6 +11,48 @@
 2. 액션 디스패치 지연
 3. 액션 크리에이터의 유연성: 함수로 동작하게 되므로, 여러 작업 수행 가능
 4. 비동기 작업의 상태 관리: 작업의 상태를 추적하고 관리 할 수 있음
+
+### 기본 구조
+<pre>
+    <code>
+        <!-- createAsyncThunk는 비동기 작업을 처리하는 action을 만들어줌 -->
+        const asyncFun = createAsyncThunk(
+            '', <!-- 타입 -->
+            async () => {
+                <!-- 액션이 실행되었을 때 처리 되어야 하는 작업 -->
+            }
+        )
+
+        const counterSlice = createSlice({
+            name: '',
+            initialState, 
+            <!-- 동기적인 action
+                - 자동으로 action create가 생성 O (툴깃)
+             -->
+            reducers: {},
+
+            <!-- 비동기적인 action 
+                - 자동으로 action create가 생성 X
+            -->
+            extraReducers: (item) => {
+                item.addCase(asyncFun.pending, (state, action) => {
+                    <!-- 진행중 -->
+                    state.status = 'loading';
+                })
+                item.addCase(asyncFun.fulfilled, (state, action) => {
+                    <!-- 완료 -->
+                    state.value = action.payload;
+                    state.status = 'complete';
+                })
+                item.addCase(asyncFun.rejected, (state, action) => { 
+                    <!-- 오륲 -->
+                    state.status = 'fail';
+                })
+            }
+        });
+
+    </code>
+</pre>
 
 ### 코드 예시
 #### counterSlice.js

@@ -1,11 +1,26 @@
 # Redux Toolkit
 - Redux의 단점을 개선한 라이브러리
+- 기존 리덕스와 구조, 패러다임은 모두 동일, 다른 점은 코드량을 줄일 수 있다는 것
+
+## 개발 이유
+- 리덕스 사용을 위해 작성한 duck 패턴 요소가 전체적인 코드량을 늘린다는 불만 발생
 
 ## 장점
 1. 초기 설정 간편: 기존 Redux는 store를 구성하는 게 복잡
 2. 미들웨어 설치 필요 X
 3. 반복되는 코드 개선
 4. 불변성을 신경 쓰지 않아도 됨: 기존 Redux는 불변성 유지가 어려웠음
+
+### 기본 구조
+<pre>
+    <code>
+        const counterSlice = createSlice({
+            name: '',
+            initialState, 
+            reducers: {}
+        });
+    </code>
+</pre>
 
 ### 코드 예시
 #### store.js
