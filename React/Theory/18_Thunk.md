@@ -45,7 +45,7 @@
                     state.status = 'complete';
                 })
                 item.addCase(asyncFun.rejected, (state, action) => { 
-                    <!-- 오륲 -->
+                    <!-- 오류 -->
                     state.status = 'fail';
                 })
             }
