@@ -10,6 +10,7 @@ FrontEnd 공부하기!
 
 [아이콘]
 - https://fontawesome.com/
+- https://www.canva.com/ko_kr/
 
 [폰트]
 -  https://fonts.google.com/
