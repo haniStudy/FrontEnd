@@ -2,8 +2,11 @@
 
 function solution(a, b, c){
     let answer="YES", max;
-    if (!(a + b > c && a + c > b && b + c > a)) answer = "NO";
+    let temps = [a, b, c].sort((a, b) => a - b); // 작은 순서로 정렬
+    if (temps[0] + temps[1] < temps[2]) answer = "NO";
+
+    // if (!(a + b > c && a + c > b && b + c > a)) answer = "NO";
     return answer;
 }
-console.log(solution(6, 7, 11));
-// console.log(solution(13, 33, 17));
+// console.log(solution(6, 7, 11));
+console.log(solution(13, 33, 17));
