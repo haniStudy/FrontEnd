@@ -1,0 +1,18 @@
+.title {
+    color: red;
+}
+
+.box1 .title {
+    color: yellow;
+}
+
+.contents {
+    font-size: 28px;
+    font-style: italic; /* 글자 기울기 */
+    /* 
+        normal: 폰트 스타일 적용 x
+        italic: 이테리체
+    */
+    text-decoration: underline;
+    font-weight: 600;
+}
