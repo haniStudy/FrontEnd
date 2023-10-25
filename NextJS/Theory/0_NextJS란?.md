@@ -1,8 +1,6 @@
 ## Next JS
 - 서버 사이드 렌더링을 지원 
 
-### 서버 사이드 렌더링
-
 ### 장점
 1. 서버에서 페이지의 HTML을 동적으로 생성, 서버에서 데이터를 가져와 렌더링하므로 클라이언트는 이미 완성된 HTML을 받게 됨.
 2. 완성된 HTML을 받기 때문에 초기 렌더링 속도가 빠름
@@ -17,3 +15,9 @@ npx create-next-app@latest .
 
 2. 프로젝트 시작
 npm run dev  
+
+3. 빌드
+npm run bulid
+
+4. 빌드한 파일 실행
+npm run start
