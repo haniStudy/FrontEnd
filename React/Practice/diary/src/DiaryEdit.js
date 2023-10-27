@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-const DiaryEdit = () => {
+const DiaryEdit = ({onCreate}) => {
     // html DOM 요소에 접근할 수 있게 해줌
     const authorRef = useRef();
     const contentRef = useRef();
@@ -31,6 +31,12 @@ const DiaryEdit = () => {
             return;
         }
 
+        onCreate(state.author, state.content, state.emotion); // 저장
+        setState({ // input 태그 초기화
+            author: "",
+            content: "",
+            emotion: "",
+        })
         alert("저장 성공");
     };
 
