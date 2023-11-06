@@ -39,3 +39,46 @@
 
     const {goodCount, badCount, goodRatio} = getDiaryAnalyis;
 ```
+
+## React.memo
+- 고차 컴포넌트: 매개변수로 컴포넌트를 넣어주면 새로운 컴포넌트를 반환
+- 동일한 props로 동일한 결과를 렌더링하는 경우 이전 렌더링 결과를 재사용 함! -> 리렌더링하지 않겠다는 의미
+- 변수가 객체인 경우 얕은 비교(주소에 의한 비교)를 해서 해당 고차 컴포넌트로 비교 불가 (같은 객체를 가르키게 하면 비교 가능)
+
+```
+import React, { useEffect, useState } from "react";
+
+    const CountView = React.memo(({count}) => {
+        useEffect(()=>{
+            console.log(`count: ${count}`);
+        })
+        return <div>{count}</div>;
+    });
+
+    const TextView = React.memo(({text}) => {
+        useEffect(()=>{
+            console.log(`text: ${text}`);
+        })
+        return <div>{text}</div>
+    });
+
+    const OptimizeTest = () => {
+        const [count, setCount] = useState(1);
+        const [text, setText] = useState("");
+
+        return <div style={{padding: 50}}>
+            <div>
+                <h2>count</h2>
+                <CountView count={count}/>
+                <button onClick={()=> setCount(count+1)}>+</button>
+            </div>
+            <div>
+                <h2>text</h2>
+                <TextView text={text}/>
+                <input value={text} onChange={(e)=> setText(e.target.value)}/>
+            </div>
+        </div>
+    }
+
+export default OptimizeTest;
+```
