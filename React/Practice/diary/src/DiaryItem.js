@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 const DiaryItem = ({author, content, created_date, emotion, id, onRemove, onEdit}) => {
     const handleRemove = () => { // 삭제
@@ -59,4 +59,4 @@ const DiaryItem = ({author, content, created_date, emotion, id, onRemove, onEdit
     )
 }
 
-export default DiaryItem;
+export default React.memo(DiaryItem);

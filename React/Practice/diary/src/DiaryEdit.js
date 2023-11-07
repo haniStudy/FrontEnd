@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 const DiaryEdit = ({onCreate}) => {
     // html DOM 요소에 접근할 수 있게 해줌
@@ -67,4 +67,4 @@ const DiaryEdit = ({onCreate}) => {
     )
 }
 
-export default DiaryEdit;
+export default React.memo(DiaryEdit);

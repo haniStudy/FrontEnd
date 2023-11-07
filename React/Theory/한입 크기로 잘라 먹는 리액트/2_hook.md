@@ -27,6 +27,7 @@
 ## useMemo
 - 성능 최적화를 위해 사용
 - 컴포넌트가 리렌더링 될 때 불필요한 재계산을 방지할 수 있음
+- 값을 반환해주기는 것을 잊지말기
 ```
     const getDiaryAnalyis = useMemo(() => {
         console.log("일기 분석 시작");
@@ -81,4 +82,23 @@ import React, { useEffect, useState } from "react";
     }
 
 export default OptimizeTest;
+```
+
+## useCallback
+- 리렌더링 최적화 하는데 사용되는 hook
+- 메모이제이션된 콜백을 반환
+
+```
+    const onCreate = useCallback((author, content, emotion) => { // 일기 추가
+            const created_date = new Date().getTime(); // 현재 시간
+            const newData = {
+                author,
+                content,
+                emotion,
+                created_date, 
+                id: dataId.current,
+            };
+            dataId.current++;
+            setDatas((data)=>[newData, ...data]); // 기존 리스트에 새로운 값 추가
+        }, []);
 ```

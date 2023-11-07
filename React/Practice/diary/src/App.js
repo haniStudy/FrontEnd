@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import './App.css';
 import DiaryEdit from "./DiaryEdit";
@@ -30,7 +30,7 @@ function App() {
     }, []);
 
     const dataId = useRef(0);
-    const onCreate = (author, content, emotion) => { // 일기 추가
+    const onCreate = useCallback((author, content, emotion) => { // 일기 추가
         const created_date = new Date().getTime(); // 현재 시간
         const newData = {
             author,
@@ -40,21 +40,19 @@ function App() {
             id: dataId.current,
         };
         dataId.current++;
-        setDatas([newData, ...datas]); // 기존 리스트에 새로운 값 추가
-    };
+        setDatas((data)=>[newData, ...data]); // 기존 리스트에 새로운 값 추가
+    }, []);
 
-    const onRemove = (targetId) => { // 일기 삭제
-        console.log(`${targetId}가 삭제되었습니다.`);
-        const newList = datas.filter((d)=> d.id !== targetId);
-        setDatas(newList);
-    };
+    const onRemove = useCallback(
+        (targetId) => { // 일기 삭제
+            console.log(`${targetId}가 삭제되었습니다.`);
+            setDatas(data => data.filter((d)=> d.id !== targetId));
+        }, []);
 
-    const onEdit = (targetId, newContent) => { // 일기 수정
-        setDatas(
-            // 수정 대상인 경우 내용 변경, 아니면 유지
-            datas.map((d)=>d.id === targetId ? {...d, content: newContent}: d)
-        );
-    };
+    const onEdit = useCallback(
+        (targetId, newContent) => { // 일기 수정
+            setDatas(data => data.map((d)=>d.id === targetId ? {...d, content: newContent}: d));
+        }, []);
 
     // 연산 최적화
     const getDiaryAnalyis = useMemo(() => {
@@ -69,7 +67,7 @@ function App() {
     return (
         <div>
             {/* <Lifecycle /> */}
-            <OptimizeTest />
+            {/* <OptimizeTest /> */}
             <DiaryEdit onCreate={onCreate}/>
             <div>전체 일기 : {datas.length}</div>
             <div>기분 좋은 일기 개수 : {goodCount}</div>
