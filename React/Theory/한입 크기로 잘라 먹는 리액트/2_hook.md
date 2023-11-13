@@ -102,3 +102,37 @@ export default OptimizeTest;
             setDatas((data)=>[newData, ...data]); // 기존 리스트에 새로운 값 추가
         }, []);
 ```
+
+## useReducer
+- 컴포넌트에서 상태변화 로직을 분리할 수 있게 해줌
+- useState의 대체 함수!
+- 복잡한 상태 로직을 다루거나, 여러 개의 연관된 상태를 함께 다루거나, 컴포넌트 상태 업데이트 로직을 분리하고 싶을 때 사용
+
+```
+    const reducer = (state, action) => {
+        switch(action.type) {
+            case "INIT": {
+                return action.data; // 새로운 state return
+            }
+            case "CREATE": {
+                const created_date = new Date().getTime();
+                const newItem = {
+                    ...action.data,
+                    created_date
+                }
+                return [newItem, ...state];
+            }
+            case "REMOVE": {
+                return state.filter((it)=>{it.id !== action.targetId});
+            }
+            case "EDIT": {
+                return state.map((it)=>{it.id === action.targetId ? {...it, content: action.newContent} : it});
+            }
+            default:
+                return state;
+        }
+    };
+
+    // datas: 상태, dispatch: reducer 함수를 실행시켜 상태를 변화하도록 함, reducer: 상태를 업데이트 하는 함수, []: 초기 값
+    const [datas, dispatch] = useReducer(reducer, []);
+```
