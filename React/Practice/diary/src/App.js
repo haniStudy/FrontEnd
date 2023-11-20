@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef, useState, useReducer } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState, useReducer } from "react";
 
 import './App.css';
 import DiaryEdit from "./DiaryEdit";
 import DiaryList from "./DiaryList";
-import OptimizeTest from "./OptimizeTest";
+// import OptimizeTest from "./OptimizeTest";
 
 const reducer = (state, action) => {
     switch(action.type) {
@@ -19,15 +19,26 @@ const reducer = (state, action) => {
             return [newItem, ...state];
         }
         case "REMOVE": {
-            return state.filter((it)=>{it.id !== action.targetId});
+            return state.filter((it) => it.id !== action.targetId);
         }
         case "EDIT": {
-            return state.map((it)=>{it.id === action.targetId ? {...it, content: action.newContent} : it});
+            return state.map((it)=>it.id === action.targetId ? {...it, content: action.newContent} : it);
         }
         default:
             return state;
     }
 };
+
+// context 선언
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
+// export
+// 파일에서 여러 번 사용 가능
+// 이름을 바꿔서 import 불가능 (비구조화 할당을 사용해야 함)
+
+// export default
+// 파일 당 하나만 사용 가능
+// 이름을 바꿔서 import 가능
 
 function App() {
     // const [datas, setDatas] = useState([]);
@@ -81,8 +92,13 @@ function App() {
     const onEdit = useCallback(
         (targetId, newContent) => { // 일기 수정
             // setDatas(data => data.map((d)=>d.id === targetId ? {...d, content: newContent}: d));
-            dispatch({type: "EDIT", targetId});
-        }, []);
+            dispatch({type: "EDIT", targetId, newContent});
+    }, []);
+    
+    // useMemo를 사용하여 앱 컴포넌트가 리렌더링 될 때 재생성되지 않도록 함.
+    const memoizedDispatchs = useMemo(()=>{
+        return {onCreate, onRemove, onEdit};
+    }, []);
 
     // 연산 최적화
     const getDiaryAnalyis = useMemo(() => {
@@ -95,16 +111,18 @@ function App() {
     const {goodCount, badCount, goodRatio} = getDiaryAnalyis;
 
     return (
-        <div>
-            {/* <Lifecycle /> */}
-            {/* <OptimizeTest /> */}
-            <DiaryEdit onCreate={onCreate}/>
-            <div>전체 일기 : {datas.length}</div>
-            <div>기분 좋은 일기 개수 : {goodCount}</div>
-            <div>기분 나쁜 일기 개수 : {badCount}</div>
-            <div>기분 좋은 일기 비율 : {goodRatio}</div>
-            <DiaryList dList={datas} onRemove={onRemove} onEdit={onEdit}/>
-        </div>
+        <DiaryStateContext.Provider value={datas}>
+            <DiaryDispatchContext.Provider value={memoizedDispatchs}>
+                {/* <Lifecycle /> */}
+                {/* <OptimizeTest /> */}
+                <DiaryEdit/>
+                    <div>전체 일기 : {datas.length}</div>
+                    <div>기분 좋은 일기 개수 : {goodCount}</div>
+                    <div>기분 나쁜 일기 개수 : {badCount}</div>
+                    <div>기분 좋은 일기 비율 : {goodRatio}</div>
+                <DiaryList dList={datas}/>
+            </DiaryDispatchContext.Provider>
+        </DiaryStateContext.Provider>
     );
 }
 
