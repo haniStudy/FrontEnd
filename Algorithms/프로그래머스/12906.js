@@ -1,5 +1,6 @@
 // https://school.programmers.co.kr/learn/courses/30/lessons/12906
 
+// 1차
 function solution(arr)
 {   
     let results = []; // 결과 값 저장할 변수
@@ -13,6 +14,16 @@ function solution(arr)
 
         // i의 값이 0 이상인 경우, 앞의 비교 값 있음
         else if (arr[i-1] !== arr[i]) results.push(num)
+    }
+    return results;
+}
+
+// 2차
+function solution(arr){
+    let results = [];
+    for (a of arr) {
+        if (a === results[results.length - 1]) continue;
+        results.push(a);
     }
     return results;
 }
