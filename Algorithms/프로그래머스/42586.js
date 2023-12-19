@@ -33,7 +33,6 @@ function solution(progresses, speeds) {
 // 2차
 function solution(progresses, speeds) {
     let answer = [];
-    let len = progresses.length; // 길이 값 저장
     while(speeds.length > 0){ // 원소가 모두 제거되면 반복문 종료
         for(s in speeds){ // for ~ in 구문 사용하여 인덱스 가져와 일치하는 인덱스에 위치한 요소 값 더해줌
             progresses[s] += speeds[s];
